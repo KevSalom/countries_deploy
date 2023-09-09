@@ -1,0 +1,86 @@
+.formContaioner{
+  position:relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 450px;
+  border: 2px solid var(--text-color);
+  padding: 35px;
+  border-radius: 8px;
+}
+
+.emojiContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.search, .slideContainer, .seasonContainer {
+    position: relative;
+    margin: 0 auto;
+    transition: 0.5s;
+    width: 100%;
+  }
+  
+  .search label, .slideContainer label, .seasonContainer label, .countriesContainer label  {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    gap:10px;
+  }
+
+  .search label p, .slideContainer label p, .seasonContainer label p, .countriesContainer label p {
+   font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+
+  
+  .search label input {
+    background-color: var(--background-color);
+    font-family: "Rubik", sans-serif;
+    height: 46px;
+    padding: 0 16px 0 16px;
+    border: 2px solid var(--text-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    color:var(--text-color);
+  }
+
+  .search label textarea {
+    background-color: var(--background-color);
+    font-family: "Rubik", sans-serif;
+    padding: 16px 16px 0 16px;
+    border: 2px solid var(--text-color);
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+    color:var(--text-color);
+  }
+  
+  .search label input:focus {
+    box-shadow: 0 0 5px 3px var(--greenLight);
+  }
+
+  .search label textarea:focus {
+    box-shadow: 0 0 5px 3px var(--greenLight);
+  }
+  
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+  }
+
+.messageError{
+
+  font-size: 0.8rem;
+  font-weight: 400;
+  color:red;
+  margin-top: 10px;
+  display: block;
+}

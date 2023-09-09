@@ -1,0 +1,56 @@
+.containerButton {
+  position: relative;
+}
+
+button.button {
+  font: inherit;
+  height: 46px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  left: -4px;
+  top: -4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+padding: 8px;
+  font-weight: 500;
+  border-radius: 12px;
+  border: 2px solid var(--text-color);
+  ;
+  z-index: 2;
+  overflow: hidden;
+  transition: left 0.1s ease, top 0.1s ease;
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  padding: 8px 12px;
+  
+}
+
+.button span {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap:5px
+}
+
+.button span ion-icon {
+  font-size: 1.2rem;
+}
+
+
+.button:hover {
+  left: 0px;
+  top: 0px;
+}
+
+.backButton {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: var(--text-color);
+  left: 0;
+  top: 0;
+  border: 2px solid var(--text-color);
+  border-radius: 14px;
+}

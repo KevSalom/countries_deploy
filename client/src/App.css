@@ -1,0 +1,71 @@
+:root {
+  font-family: 'Rubik', sans-serif;
+
+  --background-color: rgb(255 255 255);
+  --text-color: #1b1d21;
+  --greenLight:  rgb(0 241 201);
+  --gray:  #f1f1f1;
+}
+
+.dark {
+  --background-color: #1b1d21;
+  --text-color: rgb(255 255 255);
+}
+
+* {
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+
+.appContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+  color: var(--text-color);
+min-height: 100vh;
+}
+
+main {
+ /* El contenido ocupa todo el espacio disponible verticalmente */
+height: 100%;
+background-color: var( --background-color);
+overflow: hidden;
+}
+
+a{
+  text-decoration: none;
+}
+
+.active span{
+  border: 2px solid var(--text-color);
+  border-radius: 8px;
+  padding: 8px;
+  color: var(--background-color);
+  background-color: var(--text-color);
+}
+h1{
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 30px;
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--text-color);
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--background-color);
+  border-radius: 8px;
+  border: 2px solid var(--text-color);
+}

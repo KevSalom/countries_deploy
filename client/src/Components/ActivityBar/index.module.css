@@ -1,0 +1,67 @@
+
+.activityBarContainer{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+
+.search {
+    position: relative;
+    margin: 0 auto;
+    transition: 0.5s;
+    width: 100%;
+  }
+  
+  .search label {
+    position: relative;
+    width: auto;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+  }
+  
+  .search label input {
+    background-color: var(--white);
+    font-family: "Rubik", sans-serif;
+    height: 46px;
+    padding: 0 16px 0 38px;
+    border: 2px solid var(--text-color);
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .search label input:focus {
+    box-shadow: 0 0 5px 3px var(--greenLight);
+  }
+  
+  .search label ion-icon {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: auto;
+    display: block;
+    font-size: 20px;
+    left: 12px;
+    top: 13px;
+  
+  }
+
+  .itemSort{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .containerSort{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .activityDropClean{
+    display: flex;
+  justify-content: space-between;
+  }

@@ -1,0 +1,29 @@
+.activityContainer{
+    position: relative;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    
+}
+
+.cardsContainer{
+    display: flex;
+  flex-wrap: wrap;
+  width: 85%;
+  position: relative;
+}
+
+.cardWrapper {
+    flex-basis: calc(33.333% - 20px);
+    margin: 10px;
+  }
+
+.paginationContainer{
+    visibility: hidden;
+}
+
+.showPaginationContainer{
+    visibility:visible;
+}

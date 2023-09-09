@@ -1,0 +1,74 @@
+.mainContainerLeft{
+position: absolute;
+height: 70px;
+width: 70px;
+left: -55px;
+    top: 48%;;
+    transform: translateY(-50%);
+}
+
+.mainContainerRigth{
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  right: -55px;
+  top: 48%;
+      transform: translateY(-50%);
+}
+
+.containerButton {
+    position: relative;
+    height: 100%;
+  width: 100%;
+    
+  }
+
+.button {
+  border: 2px solid var(--text-color);
+  background-color: var( --background-color);
+  border-radius: 16px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  overflow: hidden;
+  transition: left 0.1s ease, top 0.1s ease;
+  position: relative;
+  left: -4px;
+  top: -4px;
+  cursor: pointer;
+}
+
+button:disabled {
+    cursor: inherit;
+    left: 0px;
+  top: 0px;
+}
+
+button:disabled .backButton {
+    display: none;
+}
+
+.button ion-icon {
+  font-size: 40px;
+  color: var(--text-color);
+}
+
+.button:hover {
+  left: 0px;
+  top: 0px;
+}
+
+.backButton {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: var(--text-color);
+  left: 0;
+  top: 0;
+  border: 2px solid var(--text-color);
+  border-radius: 14px;
+}
+

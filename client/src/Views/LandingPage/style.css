@@ -1,0 +1,104 @@
+.landingContainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    height: 100vh;
+    align-items:center;
+}
+
+.background{
+background-image: url(https://fedecamarasradio.com/wp-content/uploads/2019/10/plan-pais-turismo.jpg);
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+filter: blur(0.1px) brightness(0.1);
+width: 100%;
+height: 100%;
+position: absolute;
+top: 0;
+left: -2.5px;
+}
+
+.logoLanding{
+    position: relative;
+    width: 100px;
+    height: auto;
+}
+
+.landingContainer h2{
+    position: relative;
+    font-size: 5rem;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+}
+
+.landingContainer h3{
+    position: relative;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+}
+
+.landingButton{
+position: relative;
+color: white;
+padding: 15px 30px;
+margin: 40px 0;
+border-radius: 16px;
+border: none;
+font-family: inherit;
+font-weight: 500;
+animation: cambio-de-color 8s linear infinite alternate; /* Cambio de color cada 8 segundos con una transición suave */
+transition: background-color 0.5s ease; /* Transición suave de medio segundo */
+box-shadow: 0px 0px 0px #fe1784; 
+
+}
+
+.landingButton:hover{
+    box-shadow: 1px 1px 4px #009cb7;  
+    animation:none;
+    background-color: #fe1784;
+    box-shadow: 1px 1px 8px #fe1784; 
+    transition: box-shadow 0.2s ease;
+}
+
+
+.landingContainer span{
+    position: relative;
+    font-size: 3rem;
+    font-weight: 600;
+    color: white;
+
+}
+
+
+span.companero {
+    color: #f97129;
+}
+
+span.viaje {
+    color: #009cb7;
+}
+
+
+@keyframes cambio-de-color {
+    0% {
+      background-color: #009cb7; /* Primer color de tu marca */
+    }
+    25% {
+      background-color:#17189d; /* Segundo color de tu marca */
+    }
+    50% {
+      background-color: #fe1784; /* Tercer color de tu marca */
+    }
+    75% {
+      background-color: #f97129; /* Cuarto color de tu marca */
+    }
+    100% {
+      background-color: #6f099d; /* Vuelve al primer color */
+    }
+  }
+  

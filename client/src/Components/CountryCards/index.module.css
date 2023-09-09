@@ -1,0 +1,63 @@
+
+
+.countryCardContainer{
+    padding: 20px;
+    border: 2px solid var(--text-color);
+    border-radius: 8px;  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+gap: 10px;
+background-color: var(--gray);
+}
+
+
+.mainInfoCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.mainInfoCard h3, .mainInfoCard  h2{
+    width: 120px;
+   white-space: nowrap;
+  overflow: hidden;    
+  text-overflow: ellipsis;
+color: #1b1d21;;
+}
+
+.mainInfoCard h2 {
+  font-size: 1.25rem;
+}
+
+.mainInfoCard h3 {
+    font-size: 0.85rem;
+    font-weight: 400;
+  }
+
+.mainInfoCard img {
+    width: 90px;
+    height: 68px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 16px;
+    display: block;
+    overflow: hidden;
+    border: 2px solid var(--text-color);
+}
+
+
+.aditionalInfo{
+  border: 2px solid var(--text-color);
+  border-radius: 8px;
+  padding: 2px 0;
+  text-align: center;
+  background-color:  var(--background-color);
+}
+
+.info{
+  font-size: 0.7rem;
+  color:var(--text-color);
+  font-weight: 700;
+}

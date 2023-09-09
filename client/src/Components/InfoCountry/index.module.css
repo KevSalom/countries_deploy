@@ -1,0 +1,44 @@
+.container{
+    width: 150px;
+    position: relative;
+}
+
+.logoContainer{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    box-shadow: 2px 2px 5px rgb(8, 8, 8);
+    padding-bottom: 5px;
+}
+
+.logoContainer span{
+    position: absolute;
+    color:var(--color);
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 3.5rem;
+    left: -42px;
+}
+
+.logoContainer h3{
+    color:var(--color);
+    font-size: 0.9rem;
+    font-weight:500;
+    margin-bottom: 10px;
+}
+
+.logoContainer p{
+    color:black;
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight:500;
+    width: 50%;
+}

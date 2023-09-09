@@ -1,0 +1,29 @@
+.homeContainer{
+    position: relative;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    overflow: hidden;
+
+}
+
+.cardsContainer{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 85%;
+    gap:30px;
+    position: relative;
+
+}
+
+.paginationContainer{
+    visibility: hidden;
+
+}
+
+.showPaginationContainer{
+    visibility:visible;
+}
+

@@ -1,0 +1,51 @@
+/* DifficultySlider.module.css */
+.difficulty-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .slider-marks {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 12px;
+    color: var(--black);
+  }
+  
+  .mark {
+    position: relative;
+  }
+  
+  .mark::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 6px;
+    background-color: var(--black);
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+
+
+  input[type="range"] {
+    width: 100%; /* Ancho completo */
+    height: 10px;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    border: none;
+    outline: none;
+  }
+
+  input[type="range"]:hover{
+    background-color: var(--black);
+  }
+  
+  /* Estilos para el control deslizante */
+  input[type="range"]::-webkit-slider-thumb {
+    color: green;
+    cursor: pointer;
+  }
