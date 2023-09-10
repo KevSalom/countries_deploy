@@ -9,7 +9,7 @@ import NavBar from './Components/NavBar'
 import Footer from './Components/Footer'
 import './App.css'
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:3001'
+axios.defaults.baseURL = 'https://countriesdeploy-production.up.railway.app/'
 
 
 export default function App() {
