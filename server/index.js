@@ -14,7 +14,7 @@ async function startServer (){
     server.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
   })
-  const {data} = await axios.get('http://localhost:5000/countries');
+  const {data} = await axios.get('https://restcountries.com/v3.1/all');
   const countries = data.map((c) => {
    return c = {
       id : c.cca3,
