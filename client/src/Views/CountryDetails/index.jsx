@@ -10,7 +10,7 @@ export default function CountryDetail() {
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    const URL = `http://localhost:3001/countries/${id}`;
+    const URL = `/countries/${id}`;
     axios
       .get(URL)
       .then(({ data }) => {

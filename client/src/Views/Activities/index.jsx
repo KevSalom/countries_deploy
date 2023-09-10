@@ -22,7 +22,7 @@ export default function Activities() {
   const [searching, setSearching] = useState(true);
   const [message, setMessage] = useState(true);
  
-  const URL = "http://localhost:3001/activities";
+  const URL = "/activities";
 
   useEffect(() => {
     axios
@@ -112,7 +112,7 @@ const handleDeleteConfirmation = (id, name)=>{
 const handleDeleteAcitivty = async () => {
 
   setIsLoading(true)
-  const URL = "http://localhost:3001/activities";
+  const URL = "/activities";
   const data = { id : activityForDelete }
 
   try {

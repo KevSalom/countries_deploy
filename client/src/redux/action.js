@@ -3,7 +3,7 @@ export const GETCOUNTRIES = "GETCOUNTRIES";
 export const UPDCURRENTCOUNTRIES = "UPDCURRENTCOUNTRIES";
 export const FILTERCOUNTRY = "FILTERCOUNTRY";
 
-const URL = "http://localhost:3001/countries";
+const URL = "/countries";
 
 
 export const getCountries = () => {

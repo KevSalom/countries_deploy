@@ -15,7 +15,7 @@ const [error, setError] = useState('')
 const countriesFromRedux = useSelector(state => state.allCountries);
 const dispatch = useDispatch()
 
-const URL = "http://localhost:3001/countries";
+const URL = "/countries";
 
   useEffect(() => {
     if(countriesFromRedux.length === 0){
@@ -45,7 +45,7 @@ const URL = "http://localhost:3001/countries";
     setIsLoading(true)
 
     try {
-      const URL = 'http://localhost:3001/activities';
+      const URL = '/activities';
       const response = await axios.post(URL, data);
       
       if(response.status === 201){

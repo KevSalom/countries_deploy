@@ -12,7 +12,7 @@ export default function Activities({
   const [searchTerm, setSearchTerm] = useState("");
   const [activitiesBy, setActivitiesBy] = useState(null);
   const debounceTimeoutRef = useRef(null);
-  const URL = "http://localhost:3001/activities";
+  const URL = "/activities";
 
   // Lógica Buscador
   const handleSearch = (event) => {
@@ -36,7 +36,7 @@ export default function Activities({
         // Aquí puedes enviar la petición a la API con el valor actual de searchTerm
         // y actualizar el estado con los resultados de la búsqueda
         axios
-          .get(`http://localhost:3001/activityname?name=${searchTerm}`)
+          .get(`/activityname?name=${searchTerm}`)
           .then(({ data }) => {
             setActivities(data);
           });

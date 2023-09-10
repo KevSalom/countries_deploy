@@ -37,7 +37,7 @@ export default function CountryBar({setSearching, setMessage, resetCurrentPage, 
     debounceTimeoutRef.current = setTimeout(() => {
       // Aquí puedes enviar la petición a la API con el valor actual de searchTerm
       // y actualizar el estado con los resultados de la búsqueda
-      axios.get(`http://localhost:3001/countries?name=${searchTerm}`)
+      axios.get(`/countries?name=${searchTerm}`)
         .then(({data}) => {
           dispatch(updCurrentCountries(data));
           setSearching(false)
@@ -84,7 +84,7 @@ export default function CountryBar({setSearching, setMessage, resetCurrentPage, 
 
   //Lógica para ordenamientos
   const [continentBy, setContinentBy] = useState(null);
-  const URL = "http://localhost:3001/countries/sort";
+  const URL = "/countries/sort";
 
 
   const handleSort = async (order, sort) => { 
