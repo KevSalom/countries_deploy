@@ -22,17 +22,9 @@ export default function HomePage() {
   const totalPages = totalItems ? Math.ceil(totalItems / PageSize) : 1;
 
 
-  const URL = "http://localhost:3001/countries";
-
   useEffect(() => {
     if(countries.length === 0){
-      axios
-      .get(URL)
-      .then(({ data }) => {
-        dispatch(getCountries(data));
-        setSearching(false);
-      })
-      .catch((error) => console.log(error));
+        dispatch(getCountries()).then(setSearching(false)).catch((error) => console.log(error));
     }
 
   }, []);
