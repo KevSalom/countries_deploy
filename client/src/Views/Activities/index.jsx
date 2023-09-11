@@ -20,23 +20,26 @@ export default function Activities() {
   // Lógica de carga de actividades y Mensages
 
   const [searching, setSearching] = useState(true);
-  const [message, setMessage] = useState(true);
+  const [message, setMessage] = useState('Buscando Actividades...');
+  const [error, setError] = useState(false);
 
 
   useEffect(() => {
+
+    setSearching(true)
 
       dispatch(getActivities()).then(() => {
         setSearching(false);
         }).catch((error) => {
         if (error.response) {
           // El servidor respondió con un código distinto de 2xx
-            setSearching(false);
+          setError(true)
             setMessage(
               "Lo sentimos, parece que tenemos problemas técnicos. Contacta a soporte si el problema continúa."
             );
         } else if (error.request) {
           // No se recibió respuesta del servidor o No hay internet
-          setSearching(false);
+          setError(true)
           setMessage(
             "No se pudieron cargar las actividades. Por favor, verifica tu conexión a Internet y, si el problema persiste, es posible que haya problemas nuestro servidor."
           );
@@ -46,13 +49,17 @@ export default function Activities() {
 
       // Detecta cuando ya terminó la búsqueda y no hay mas actividades
       useEffect(()=>{
-        if(activities.length === 0 && !searching){
-          setSearching(false);
-          setMessage('Ups, aún no hay actividades para mostrar...')
+
+if(error){
+  setSearching(false);
+} else if(activities.length === 0 && !searching){
+          setMessage('Ups, no hay actividades para mostrar...')
+        } else if((activities.length === 0 && searching )){
+          setMessage('Buscando Actividades...')
         } else{
           setMessage('')
         }
-      },[activities])
+      },[activities, error, searching])
 
 
   //Pagianción
@@ -186,9 +193,9 @@ export default function Activities() {
       <ActivityBar
         resetCurrentPage={setCurrentPage}
       />
-      {searching ? <p>Buscando Actividades...</p> : null}
+       {message ? <p>{message}</p> : undefined}
       {searching ? <MiniLoader /> : undefined}
-      {message ? <p>{message}</p> : undefined}
+     
       <div
         className={style.cardsContainer}
         onMouseEnter={() => setShowPagination(true)}

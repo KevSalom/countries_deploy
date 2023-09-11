@@ -6,7 +6,7 @@ import DropDown from "../DropDown"
 import axios from "axios";
 import style from './index.module.css'
 
-export default function CountryBar({setSearching, setMessage, resetCurrentPage, setInfoCards}) {
+export default function CountryBar({setMessage, resetCurrentPage, setInfoCards}) {
   // Loógica del buscador
   const [searchTerm, setSearchTerm] = useState("");
   const debounceTimeoutRef = useRef(null);
@@ -22,7 +22,6 @@ export default function CountryBar({setSearching, setMessage, resetCurrentPage, 
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-    setSearching(true);
     resetCurrentPage(1)
   };
 
@@ -34,7 +33,6 @@ export default function CountryBar({setSearching, setMessage, resetCurrentPage, 
       }
   
       dispatch(updCurrentCountries(countries));
-      setSearching(false)
     } else{
       setMessage(null)
       if (debounceTimeoutRef.current) {
@@ -47,10 +45,8 @@ export default function CountryBar({setSearching, setMessage, resetCurrentPage, 
       axios.get(`/countries?name=${searchTerm}`)
         .then(({data}) => {
           dispatch(updCurrentCountries(data));
-          setSearching(false)
         }).catch(({response}) => {
          dispatch(updCurrentCountries([]));
-         setSearching(false)
          setMessage(response.data.error)});
          
     }, 300)}; // 300ms de retraso

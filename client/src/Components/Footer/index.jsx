@@ -8,8 +8,8 @@ export default function Footer ({theme}){
     return (
         <footer >
             
-            {!theme && <div><a href=""><img src={whiteLinkLogo}/></a>  <a href=""><img src={whiteXLogo}/></a> </div>}
-            {theme && <div><a href=""><img src={linkLogo} /></a>  <a href=""><img src={xLogo} /></a> </div>}
+            {!theme && <div><a href="https://www.linkedin.com/in/kevin-salom-465aa2154/" target='_blank'><img src={whiteLinkLogo}/></a>  <a href="https://twitter.com/KevinSalom1" target='_blank'><img src={whiteXLogo}/></a> </div>}
+            {theme && <div><a href="https://www.linkedin.com/in/kevin-salom-465aa2154/" target='_blank'><img src={linkLogo} /></a>  <a href="https://twitter.com/KevinSalom1" target='_blank'><img src={xLogo} /></a> </div>}
             <p>Desarrollado con ❤️ por Kevin Salom</p> 
         </footer>
     )

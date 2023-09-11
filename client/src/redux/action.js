@@ -10,30 +10,22 @@ export const COUNTRYBYACTIVITY = "COUNTRYBYACTIVITY";
 export const getCountries = () => {
   const URL = "/countries";
   return async function (dispatch) {
-    try {
       const { data } = await axios.get(URL);
       return dispatch({
         type: GETCOUNTRIES,
         payload: data,
       });
-    } catch (error) {
-      window.alert("No se pudieron obtener los paises");
     }
-  };
 };
 
 export const getActivities = () => {
   const URL = "/activities";
   return async function (dispatch) {
-    try {
       const { data } = await axios.get(URL);
       return dispatch({
         type: GETACTIVITIES,
         payload: data,
       });
-    } catch (error) {
-      window.alert("No se pudieron obtener los paises");
-    }
   };
 };
 
