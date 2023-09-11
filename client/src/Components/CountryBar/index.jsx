@@ -94,7 +94,8 @@ export default function CountryBar({setSearching, setMessage, resetCurrentPage, 
 
   useEffect(()=>{
 
-    if(dropDownValueActivity !== ''){dispatch(getCountriesByActivity(dropDownValueActivity));
+    if(dropDownValueActivity !== ''){
+    dispatch(getCountriesByActivity(dropDownValueActivity));
     setMessage(null)
     setSearchTerm("")
     resetCurrentPage(1)}
@@ -135,13 +136,14 @@ export default function CountryBar({setSearching, setMessage, resetCurrentPage, 
 const countries = useSelector((state)=> state.allCountries)
 
 const cleanFilters = () => {
-  dispatch(updCurrentCountries(countries));
+ 
   setSearchTerm('')
   setContinentBy(null);
   setMessage(null)
   resetCurrentPage(1)
   setDropDownValueContinent("");
   setDropDownValueActivity('')
+  dispatch(updCurrentCountries(countries));
 }
 
   return (
