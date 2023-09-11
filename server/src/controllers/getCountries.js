@@ -17,10 +17,10 @@ module.exports = async (req, res) => {
          include:[{
             model: Activity,
             as: 'Activities',
-            attributes: [],
+            attributes: ['name'],
             through: {attributes: []},
          }],
-         group: ['Country.id'] 
+         group: ['Country.id', 'Activities.id'] 
        });
        
     return res.status(200).json(allCountries)

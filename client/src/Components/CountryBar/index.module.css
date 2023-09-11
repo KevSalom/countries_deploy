@@ -65,3 +65,9 @@
   display: flex;
 justify-content: space-between;
 }
+
+.activityAndCleaner{
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}

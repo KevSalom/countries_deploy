@@ -2,15 +2,15 @@ import CountryBar from "../../Components/CountryBar";
 import { useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CountryCards from "../../Components/CountryCards";
-import { getCountries } from "../../redux/action";
+import { getCountries, getActivities } from "../../redux/action";
 import Pagination from "../../Components/Pagination";
-import axios from "axios";
 import style from "./index.module.css";
 
 export default function HomePage() {
   const [searching, setSearching] = useState(true);
   const [message, setMessage] = useState(null);
   const countries = useSelector((state) => state.currentCountries);
+
   const [countriesData, setCountriesData] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [showPagination, setShowPagination] = useState(false);
@@ -26,6 +26,7 @@ export default function HomePage() {
     if(countries.length === 0){
         dispatch(getCountries()).then(setSearching(false)).catch((error) => console.log(error));
     }
+
 
   }, []);
 

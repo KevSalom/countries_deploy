@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updCurrentCountries, filterByContinet } from "../../redux/action";
+import { updCurrentCountries, filterByContinet, getActivities, getCountriesByActivity } from "../../redux/action";
 import Button from "../Button";
 import DropDown from "../DropDown"
 import axios from "axios";
@@ -11,7 +11,14 @@ export default function CountryBar({setSearching, setMessage, resetCurrentPage, 
   const [searchTerm, setSearchTerm] = useState("");
   const debounceTimeoutRef = useRef(null);
   const dispatch = useDispatch();
+  const activities = useSelector((state) => state.allActivities);
   
+
+  useEffect(() => {
+    if(activities.length === 0){
+      dispatch(getActivities()).catch((error) => console.log(error))
+    }
+  }, []);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -51,7 +58,8 @@ export default function CountryBar({setSearching, setMessage, resetCurrentPage, 
   
 
   //DropDown
-  const [dropDownValue, setDropDownValue] = useState('')
+  const [dropDownValueContinent, setDropDownValueContinent] = useState('')
+  const [dropDownValueActivity, setDropDownValueActivity] = useState('')
 
   useEffect(()=>{
     
@@ -60,19 +68,19 @@ export default function CountryBar({setSearching, setMessage, resetCurrentPage, 
       dispatch(filterByContinet(continent));
     }
 
-    if(dropDownValue === 'África'){
+    if(dropDownValueContinent === 'África'){
       handleValue('Africa')
-    } else if(dropDownValue === 'Europa') {
+    } else if(dropDownValueContinent === 'Europa') {
       handleValue('Europe')
-    } else if((dropDownValue === 'Oceanía')){
+    } else if((dropDownValueContinent === 'Oceanía')){
       handleValue('Oceania')
-    } else if(dropDownValue === 'América del Sur'){
+    } else if(dropDownValueContinent === 'América del Sur'){
       handleValue('South America')
-    } else if(dropDownValue === 'América del Norte'){
+    } else if(dropDownValueContinent === 'América del Norte'){
       handleValue('North America')
-    } else if (dropDownValue === 'Antártida'){
+    } else if (dropDownValueContinent === 'Antártida'){
       handleValue('Antarctica')
-    } else if(dropDownValue === 'Asia'){
+    } else if(dropDownValueContinent === 'Asia'){
       handleValue('Asia')
     }
 
@@ -80,7 +88,20 @@ export default function CountryBar({setSearching, setMessage, resetCurrentPage, 
     setSearchTerm("")
     resetCurrentPage(1)
 
-  }, [dropDownValue])
+  }, [dropDownValueContinent])
+
+
+
+  useEffect(()=>{
+
+    if(dropDownValueActivity !== ''){dispatch(getCountriesByActivity(dropDownValueActivity));
+    setMessage(null)
+    setSearchTerm("")
+    resetCurrentPage(1)}
+
+  }, [dropDownValueActivity])
+
+
 
   //Lógica para ordenamientos
   const [continentBy, setContinentBy] = useState(null);
@@ -119,18 +140,22 @@ const cleanFilters = () => {
   setContinentBy(null);
   setMessage(null)
   resetCurrentPage(1)
-  setDropDownValue("");
+  setDropDownValueContinent("");
+  setDropDownValueActivity('')
 }
 
   return (
       <div className={style.countryBarCointainer} >
       
        <div className={style.continetCointainer}>
-        <DropDown options={['África', 'Europa', 'Oceanía', 'Asia', 'América del Sur', 'América del Norte', 'Antártida' ]} dropDownValue={dropDownValue} setDropDownValue={setDropDownValue} defaultText={'🌐 Continentes'} />
+        <DropDown options={['África', 'Europa', 'Oceanía', 'Asia', 'América del Sur', 'América del Norte', 'Antártida' ]} dropDownValue={dropDownValueContinent} setDropDownValue={setDropDownValueContinent} defaultText={'🌐 Continentes'} />
     
-            <Button text={'🧹 Limpiar Filtros'} onclick={cleanFilters}/>
-        
-        </div>
+<div className={style.activityAndCleaner} >
+        { activities.length > 0 && <DropDown options={activities.map((a)=> a.name)} dropDownValue={dropDownValueActivity} setDropDownValue={setDropDownValueActivity} defaultText={'🛍️ Tipos de Actividades'} />}
+
+          <Button text={'🧹'} onclick={cleanFilters}/>
+          </div>
+        </div >
 
           <div className={style.search}>
         <label htmlFor="search">

@@ -1,19 +1,20 @@
 import { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updCurrentActivities } from "../../redux/action";
 import axios from "axios";
 import Button from "../Button";
 import DropDown from "../DropDown";
 import style from "./index.module.css";
 
-export default function Activities({
-  setActivities,
+export default function ActivityBar({
   resetCurrentPage,
-  backActivities
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [activitiesBy, setActivitiesBy] = useState(null);
   const debounceTimeoutRef = useRef(null);
-  const URL = "/activities";
-
+  const allActivities = useSelector((state) => state.allActivities);
+  const dispatch = useDispatch();
+  
   // Lógica Buscador
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -26,7 +27,7 @@ export default function Activities({
       if(debounceTimeoutRef.current){
         clearTimeout(debounceTimeoutRef.current)
       }
-      setActivities(backActivities);
+      dispatch(updCurrentActivities(allActivities))
     } else{
       if(debounceTimeoutRef.current){
         clearTimeout(debounceTimeoutRef.current)
@@ -38,7 +39,7 @@ export default function Activities({
         axios
           .get(`/activityname?name=${searchTerm}`)
           .then(({ data }) => {
-            setActivities(data);
+            dispatch(updCurrentActivities(data))
           });
       }, 300)
     }
@@ -47,19 +48,22 @@ export default function Activities({
 
   //Lógica para filtros por estación
 
-  //DropDown
   const [dropDownValue, setDropDownValue] = useState("");
 
   useEffect(() => {
     if(dropDownValue){setSearchTerm("");
     setActivitiesBy(dropDownValue);
-    setActivities(
-      backActivities && backActivities.filter((a) => a.season === dropDownValue)
-    );
+
+    const newActivities = allActivities && allActivities.filter((a) => a.season === dropDownValue);
+    dispatch(updCurrentActivities(newActivities))
+
     resetCurrentPage(1);}
   }, [dropDownValue]);
 
+
   //Lógica para ordenamientos
+  const URL = "/activities";
+
   const handleSort = async (type, sort) => {
     try {
       const querySort = sort ? `&sort=${"ASC"}` : `&sort=${"DESC"}`;
@@ -67,15 +71,17 @@ export default function Activities({
       const activitiesDb = await axios.get(
         `${URL}?type=${type}${querySort}${querySeason}`
       );
-      setActivities(activitiesDb.data);
+      dispatch(updCurrentActivities(activitiesDb.data))
       setSearchTerm("");
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
   };
 
   //Botón para limpiar los filtros y searchbar
   const cleanFilters = () => {
     resetCurrentPage(1);
-    setActivities(backActivities);
+    dispatch(updCurrentActivities(allActivities))
     setSearchTerm("");
     setActivitiesBy(null);
     setDropDownValue("");
