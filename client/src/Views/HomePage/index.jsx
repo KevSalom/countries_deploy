@@ -23,11 +23,7 @@ export default function HomePage() {
 
 
   useEffect(() => {
-    if(countries.length === 0){
         dispatch(getCountries()).then(setSearching(false)).catch((error) => console.log(error));
-    }
-
-
   }, []);
 
   useEffect(() => {

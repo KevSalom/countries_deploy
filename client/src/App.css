@@ -1,7 +1,9 @@
 :root {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Segoe UI', Frutiger, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
 
-  --background-color: rgb(255 255 255);
+  --background-color: #f1f1f1;
+  --background-color-white: #ffffff;
+  --background-color-cards:#ffffff;
   --text-color: #1b1d21;
   --greenLight:  rgb(0 241 201);
   --gray:  #f1f1f1;
@@ -9,7 +11,9 @@
 
 .dark {
   --background-color: #1b1d21;
+  --background-color-white: #1b1d21;
   --text-color: rgb(255 255 255);
+  --background-color-cards:#f3f3f3;
 }
 
 * {

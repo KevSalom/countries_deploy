@@ -8,7 +8,7 @@
     flex-direction: column;
     justify-content: space-between;
 gap: 10px;
-background-color: var(--gray);
+background-color: var( --background-color-cards);
 }
 
 

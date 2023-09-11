@@ -5,7 +5,7 @@
   gap: 10px;
   border: 2px solid var(--text-color);
   border-radius: 8px;
-  background-color: var(--gray);
+  background-color: var(--background-color-cards);
   padding: 20px;
   position: relative;
   color: #1b1d21;

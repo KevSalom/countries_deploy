@@ -162,7 +162,7 @@ export default function ActivityForm({
 
       <div className={style.search}>
         <label htmlFor="description">
-          <p>Descripción</p>
+          <p>Descripción:</p>
           <textarea
             id="description"
             name="description"

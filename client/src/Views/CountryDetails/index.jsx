@@ -42,11 +42,11 @@ export default function CountryDetail() {
       </div>
       
     <div className={style.infoContainer} >
-    <InfoCountry  logo={'🗺️'} title={'CONTINENTE'} text={countryData && countryData.continent}  border={'6px solid #009cb7'} color={'#009cb7'} />
-    <InfoCountry  logo={'👨‍👩‍👧‍👦'} title={'POBLACIÓN'} text={countryData && countryData.population} border={'6px solid #f97129'} color={'#f97129'} />
-    <InfoCountry  logo={'㊙️'} title={'IDIOMA'} text={countryData && countryData.languages[0]} border={'6px solid rgb(254, 23, 132)'} color={'rgb(254, 23, 132)'}/>
-    <InfoCountry  logo={'💵'} title={'MONEDA'} text={countryData && Object.values(countryData.currencies)[0].name} border={'6px solid #6f099d'} color={'#6f099d'}/>
-    <InfoCountry  logo={'🌎'} title={'ÁREA'} text={countryData && countryData.area} border={'6px solid #17189d'} color={'#17189d'}/>
+    <InfoCountry  logo={'🗺️'} title={'CONTINENTE'} text={countryData && countryData.continent}  border={'6px solid #009cb7cc'} color={'#009cb7cc'} />
+    <InfoCountry  logo={'👫'} title={'POBLACIÓN'} text={countryData && countryData.population} border={'6px solid #f97129cc'} color={'#f97129cc'} />
+    <InfoCountry  logo={'㊙️'} title={'IDIOMA'} text={countryData && countryData.languages[0]} border={'6px solid #fe1784cc'} color={'#fe1784cc'}/>
+    <InfoCountry  logo={'💵'} title={'MONEDA'} text={countryData && Object.values(countryData.currencies)[0].name} border={'6px solid #6f099dcc'} color={'#6f099dcc'}/>
+    <InfoCountry  logo={'🌎'} title={'ÁREA'} text={countryData && countryData.area} border={'6px solid #17189dcc'} color={'#17189dcc'}/>
     </div>
       
     </div>
