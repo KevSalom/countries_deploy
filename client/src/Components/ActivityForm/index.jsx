@@ -7,10 +7,7 @@ import Emojis from "../Emojis";
 import style from "./index.module.css";
 
 export default function ActivityForm({
-  handleSubmit,
-  errorMessage,
-  setMessage,
-  error
+  handleSubmit
 }) {
   const patternData = {
     name: "",
@@ -24,26 +21,69 @@ export default function ActivityForm({
 
   const [countriesSelected, setCountriesSelected] = useState([]);
   const [sliderValue, setSliderValue] = useState(1);
+  const [errorMessage, setErrorMessage] = useState(false)
   const [errors, setErrors] = useState(patternData);
   const [showEmojis, setShowEmojis] = useState(false)
   const [emoji, setEmoji] = useState(false)
   const [data, setData] = useState(patternData);
+  const [disabled, setDisabled] = useState(true)
 
+
+
+//Valido nombre, descripción, duración y dificultad
   const validate = (element) => {
     if (element.name === "name") {
       if (!element.value) {
         setErrors({ ...errors, name: "La actividad debe tener un nombre" });
-      } else if (
-        element.value.charAt(0) !== element.value.charAt(0).toUpperCase()
-      ) {
+
+      } else if (element.value.charAt(0) !== element.value.charAt(0).toUpperCase()) {
         setErrors({
           ...errors,
           name: "La primera letra del nombre en mayúscula",
         });
-      } else {
+
+      } else if(element.value.length > 25){
+        setErrors({
+          ...errors,
+          name: "El nombre no debe tener más de 25 caracteres",
+        });
+
+      }
+      else {
         setErrors({ ...errors, name: "" });
       }
     }
+
+
+    if (element.name === "description") {
+      if (!element.value) {
+        setErrors({ ...errors, description: "La actividad debe tener una descripción" });
+
+      } else if (element.value.charAt(0) !== element.value.charAt(0).toUpperCase()) {
+        setErrors({
+          ...errors,
+          description: "La primera letra de la desripción en mayúscula",
+        });
+
+      } else if(element.value.length < 15){
+        setErrors({
+          ...errors,
+          description: "La descripción debe tener minimo 15 caracteres",
+        });
+
+      }
+      else if(element.value.length > 255){
+        setErrors({
+          ...errors,
+          description: "La descripciónno debe tener más de 255 caracteres",
+        });
+
+      }
+      else {
+        setErrors({ ...errors, description: "" });
+      }
+    }
+
 
     if (element.name === "duration") {
       if (element.value <= 0 ||  element.value === '') {
@@ -63,6 +103,22 @@ export default function ActivityForm({
     }
   };
 
+
+  //Para activar el boton
+  useEffect(()=>{
+    const errorEmpty = Object.values(errors).every((valor) => valor === "" || valor === 1);
+    const countriesEmpty = data.countries.length === 0;
+    const dataEmpty = Object.values(data).every((valor) => valor !== "")
+
+    if (errorEmpty && !countriesEmpty && dataEmpty ) {
+      setDisabled(false)
+      setErrorMessage('')
+    } else {
+      setErrorMessage(true);
+      setDisabled(true)
+    }
+  }, [data, errors])
+
  
   // Para actualizar los paises seleccionandos
   useEffect(() => {
@@ -75,8 +131,8 @@ export default function ActivityForm({
   }, [countriesSelected]);
 
 
+
   const handleChange = (e) => {
-    setMessage("");
     let element = e.target.name;
     let value = e.target.value;
 
@@ -92,10 +148,11 @@ export default function ActivityForm({
     validate(e.target);
   };
 
+
+
   const handleEmoji = (emoji) => {
     setShowEmojis(false)
     setEmoji(emoji)
-    validate(emoji);
     setData((prevState) => ({
       ...prevState,
       emoji: emoji
@@ -103,40 +160,24 @@ export default function ActivityForm({
   }
 
   const handleForm = async (ev) => {
-    ev.preventDefault();
-
-    const errorEmpty = Object.values(errors).every((valor) => valor === "" || valor === 1);
-    const countriesEmpty = data.countries.length === 0;
-    const dataEmpty = Object.values(data).every((valor) => valor !== "")
-
-
-    if (errorEmpty && !countriesEmpty && dataEmpty) {
+      ev.preventDefault();
       if (await handleSubmit(data))
       setData(patternData);
       setCountriesSelected([]);
       setSliderValue(0);
-      errorMessage("");
-      setMessage("");
       setEmoji(false);
       setDropDownValue("");
-    } else {
-      errorMessage("Los campos con (*) son obligatorios, por favor completalos");
-    }
-  };
+    } 
 
 
-  //DropDown
+  //DropDown de estaciones o temporadas
   const [dropDownValue, setDropDownValue] = useState("");
 
   useEffect(() => {
-    setMessage("");
-
     setData((prevState) => ({
       ...prevState,
       season: dropDownValue,
     }));
-
-    validate(dropDownValue);
   }, [dropDownValue]);
 
 
@@ -157,7 +198,7 @@ export default function ActivityForm({
          
         </label>
         {errors.name && <span className={style.messageError} >{errors.name}</span>}
-        {(error && !errors.name && !data.name)?<span className={style.messageError}>La actividad debe tener un nombre</span>:undefined}
+        {(errorMessage && !errors.name && !data.name)?<span className={style.messageAlert}>*La actividad debe tener un nombre</span>:undefined}
       </div>
 
       <div className={style.search}>
@@ -173,6 +214,8 @@ export default function ActivityForm({
             onChange={handleChange}
           />
         </label>
+        {errors.description && <span className={style.messageError} >{errors.description}</span>}
+        {(errorMessage && !errors.description && !data.description)?<span className={style.messageAlert}>*La actividad debe tener una descripción</span>:undefined}
       </div>
 
 
@@ -189,7 +232,7 @@ export default function ActivityForm({
           
         </label>
         {errors.season && <span className={style.messageError}>{errors.season}</span>}
-        {(error && !errors.season && !data.season)?<span className={style.messageError}>Debes escoger una temporada</span>:undefined}
+        {(errorMessage && !errors.season && !data.season)?<span className={style.messageAlert}>*Debes escoger una temporada</span>:undefined}
       </div>
 
       <div className={style.search}>
@@ -200,7 +243,7 @@ export default function ActivityForm({
           <Button text={(!emoji)?'Escoje un Emoji 😀':`Tu Emoji: ${emoji}`} onclick={()=>setShowEmojis(!showEmojis)}/> 
         {showEmojis && <div className={style.emojiContainer}> <Emojis handleEmoji={handleEmoji} /> </div> }
 
-{(error && !data.emoji)?<span className={style.messageError}>Debe escoger un emoji</span>:undefined}
+{(errorMessage && !data.emoji)?<span className={style.messageAlert}>*Debes escoger un emoji</span>:undefined}
         </label>
      
       </div>
@@ -218,9 +261,10 @@ export default function ActivityForm({
             onChange={handleChange}
             value={data.duration}
             min="0"
-            required
           />
-          {errors.duration && <span className={style.messageError} >{errors.duration}</span>}
+
+{errors.duration && <span className={style.messageError} >{errors.duration}</span>}
+        {(errorMessage && !errors.duration && !data.duration)?<span className={style.messageAlert}>*La actividad debe durar mínimo un día</span>:undefined}
         </label>
       </div>
 
@@ -245,11 +289,11 @@ export default function ActivityForm({
           setErrors={setErrors}
           errors={errors}
         />
-        {(error && errors.countries.length === 0 && data.countries.length === 0)?<span className={style.messageError}>Debes seleccionar mínimo un país</span>:undefined}
+        {(errorMessage && errors.countries.length === 0 && data.countries.length === 0)?<span className={style.messageAlert}>*Debes seleccionar mínimo un país</span>:undefined}
         {errors.countries && <span className={style.messageError}>{errors.countries}</span>}
       </label>
       </div>
-      <Button text={"Crear"} type={'submit'} />
+      <Button text={"PUBLICAR ACTIVIDAD"} type={'submit'} disabled={disabled} />
     </form>
   );
 }

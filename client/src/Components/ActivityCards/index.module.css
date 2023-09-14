@@ -65,20 +65,22 @@ overflow: hidden;
   background-color: #1b1d21;
   color: white;
   border-bottom-left-radius: 8px;
+  padding: 5px;
   transition: padding 0.1s linear;
  
 }
 
-.buttonHeader button ion-icon{
+.buttonHeader button span{
   font-size: 1rem;
-margin:5px ;
-transition: margin 0.1s linear, font-size 0.1s linear;
+  padding: 0 5px;
+transition: padding 0.1s linear, font-size 0.1s linear;
   }
   
-.buttonHeader button:hover ion-icon{
+.buttonHeader button:hover span{
 font-size: 2rem;
-margin: 0;
-  transition: margin 0.1s linear, font-size 0.1s linear;
+padding: 0px 10px 2px 10px;
+display: block;
+  transition: padding 0.2s linear, font-size 0.2s linear;
 }
 
 

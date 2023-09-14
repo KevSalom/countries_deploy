@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getActivities, deleteActivity } from "../../redux/action";
+import { getActivities, deleteActivity, getCountries } from "../../redux/action";
 import ActivityBar from "../../Components/ActivityBar";
 import ActivityCard from "../../Components/ActivityCards";
 import Pagination from "../../Components/Pagination";
@@ -64,7 +64,6 @@ if(error){
 
   //Pagianción
   const PageSize = 6;
-  const [showPagination, setShowPagination] = useState(false);
   const totalItems = activities ? activities.length : 0;
   const totalPages = totalItems ? Math.ceil(totalItems / PageSize) : 1;
   const [currentPage, setCurrentPage] = useState(1);
@@ -145,6 +144,7 @@ if(error){
     if (response.status === 200) {
 
       dispatch(deleteActivity(activityForDelete));
+      dispatch(getCountries());
         setIsLoading(false);
         setModalType("success");
         setModalTitle("EXCELENTE");
@@ -198,8 +198,6 @@ if(error){
      
       <div
         className={style.cardsContainer}
-        onMouseEnter={() => setShowPagination(true)}
-        onMouseLeave={() => setShowPagination(false)}
       >
         {(activitiesData && !searching) &&
           activitiesData.map((a, index) => (
@@ -220,7 +218,7 @@ if(error){
           ))}
         <div
           className={
-            showPagination && activities.length > 6
+           activities.length > 6
               ? style.showPaginationContainer
               : style.paginationContainer
           }

@@ -12,7 +12,7 @@ export default function ActivityCards({ id, name, emoji, countries, description,
         </div>
         
         <div className={style.buttonHeader}>
-          <button onClick={()=> handleDeleteConfirmation(id, name)}><ion-icon name="close"></ion-icon></button>
+          <button onClick={()=> handleDeleteConfirmation(id, name)}><span>x</span> </button>
         </div>
 
       </div>

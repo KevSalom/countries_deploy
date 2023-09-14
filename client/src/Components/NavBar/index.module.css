@@ -32,6 +32,10 @@ a, a:hover, a:active {
     margin: 0;
 }
 
+.menuButton span{
+    font-size: 1.1rem;
+}
+
 .logo{
     display: flex;
     align-items: center;
@@ -74,4 +78,9 @@ a, a:hover, a:active {
     padding: 8px;
     color: var(--background-color);
     background-color: var(--text-color);
+}
+
+a img{
+    width: 20px;
+    height: 20px;
 }

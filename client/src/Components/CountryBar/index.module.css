@@ -30,13 +30,14 @@
   border-radius: 8px;
   font-size: 16px;
   width: 100%;
+  color:var(--text-color);
 }
 
 .search label input:focus {
   box-shadow: 0 0 5px 3px var(--greenLight);
 }
 
-.search label ion-icon {
+.search label span {
   position: absolute;
   box-sizing: border-box;
   padding: 0px;
@@ -44,7 +45,7 @@
   display: block;
   font-size: 20px;
   left: 12px;
-  top: 13px;
+  top:8px;
 
 }
 
@@ -53,6 +54,11 @@
   align-items: center;
   gap: 7px;
 }
+
+.itemSort span{
+  font-size: 1.5rem;
+  padding-bottom: 5px;
+    }
 
 
 .containerSort{

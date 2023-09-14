@@ -2,31 +2,45 @@ import CountryBar from "../../Components/CountryBar";
 import { useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CountryCards from "../../Components/CountryCards";
-import { getCountries} from "../../redux/action";
+import { getCountries, updCurrentCountries} from "../../redux/action";
 import Pagination from "../../Components/Pagination";
 import style from "./index.module.css";
 import MiniLoader from "../../Components/MiniLoader";
 
 
-export default function HomePage() {
+export default function HomePage({firstUpdate}) {
+
+  const dispatch = useDispatch();
+  const allCountries = useSelector((state) => state.allCountries);
+  const countries = useSelector((state) => state.currentCountries);
+  const [aux, setAux] = useState(true)
+
+  //Estados para el control de mensajes y loader
   const [searching, setSearching] = useState(true);
   const [message, setMessage] = useState('Buscando países...');
-  const countries = useSelector((state) => state.currentCountries);
 
-  const [countriesData, setCountriesData] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [showPagination, setShowPagination] = useState(false);
-  const [infoCards, setInfoCards] = useState("");
-  const dispatch = useDispatch();
 
+  //Para renderizar en las tarjetas Actividad, Población o área segun el orden seleccioinado.
+  const [infoCards, setInfoCards] = useState(""); 
+
+
+  //Estados necesarios para el control del componente de paginación
   const PageSize = 10;
+  const [currentPage, setCurrentPage] = useState(1);
   const totalItems = countries ? countries.length : 0;
   const totalPages = totalItems ? Math.ceil(totalItems / PageSize) : 1;
 
+  //Estado que se usara para renderizar las tarjetas
+  const [countriesData, setCountriesData] = useState('');
 
+
+  //Para la cargar de paises y llenar el estado de redux
   useEffect(() => {
-        dispatch(getCountries()).then(() => {
+       
+    if(countries.length === 0){
+      dispatch(getCountries()).then(() => {
           setSearching(false);
+          setAux(!aux)
           }).catch((error) => {
           if (error.response) {
             // El servidor respondió con un código distinto de 2xx
@@ -41,26 +55,40 @@ export default function HomePage() {
               "No se pudieron cargar los países. Por favor, verifica tu conexión a Internet y, si el problema persiste, es posible que haya problemas nuestro servidor."
             );
           }
-        })
+        })}
+        
   }, []);
 
   useEffect(()=>{
+
+    if(allCountries.length > 0 && allCountries.length !== countries.length && firstUpdate.current){
+      console.log('entreeeeeeeee')
+      dispatch(updCurrentCountries(allCountries))
+    firstUpdate.current = false;  }
+  }, [allCountries])
+
+
+  //Para controlar el mensaje mostrado
+  useEffect(()=>{
     if(countries.length === 0 && !searching){
-      setMessage('Ups, no hay países para mostrar...')
+      setMessage('Ups, no hay países para mostrar o que coincidan con el filtrado indicado...')
     } else if((countries.length === 0 && searching )){
       setMessage('Buscando Países...')
     } else{
-      setMessage('')
+      setMessage('');
+      setSearching(false);
     }
   },[countries])
 
+
+  //Se cálcula la paginación
   useEffect(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     setCountriesData(
       countries && countries.slice(firstPageIndex, lastPageIndex)
     );
-  }, [currentPage, countries]);
+  }, [currentPage, countries, aux]);
 
   const onNext = () => {
     setCurrentPage(currentPage + 1);
@@ -70,6 +98,7 @@ export default function HomePage() {
     setCurrentPage(currentPage - 1);
   };
 
+
   return (
     <div className={style.homeContainer}>
       <h1>Explora Nuevos Países</h1>
@@ -78,6 +107,8 @@ export default function HomePage() {
         setMessage={setMessage}
         resetCurrentPage={setCurrentPage}
         setInfoCards={setInfoCards}
+        setAux={setAux} 
+        aux={aux}
       />
       {message ? <p>{message}</p> : undefined}
       {searching ? <MiniLoader /> : undefined}
@@ -85,8 +116,6 @@ export default function HomePage() {
 
       <div
         className={style.cardsContainer}
-        onMouseEnter={() => setShowPagination(true)}
-        onMouseLeave={() => setShowPagination(false)}
       >
         {!searching &&
           countries &&
@@ -98,8 +127,8 @@ export default function HomePage() {
               infoCards === "name"
                 ? ` 🛍️ ${p.totalActivities} Actividades`
                 : infoCards === "population"
-                ? `👫 ${p.population}`
-                : `🌎 ${p.area}`;
+                ? `👫 ${p.population.toLocaleString('en-US')} habs`
+                : `🌎 ${p.area.toLocaleString('en-US')} Km2`;
 
             return (
               <CountryCards
@@ -114,7 +143,7 @@ export default function HomePage() {
           })}
         <div
           className={
-            showPagination && countries.length > 6
+            countries.length > 6
               ? style.showPaginationContainer
               : style.paginationContainer
           }

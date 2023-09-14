@@ -3,6 +3,10 @@ import { NavLink, Link } from "react-router-dom";
 import style from "./index.module.css";
 import actizone from "../../assets/actizone.svg";
 import Button from "../Button"
+import logoutaW from '../../assets/logoutaW.svg'
+import logoutB from '../../assets/logoutB.svg'
+import plusB from '../../assets/plusB.svg'
+import plusW from '../../assets/plusW.svg'
 
 export default function NavBar({handleTheme, theme}) {
 
@@ -47,9 +51,11 @@ export default function NavBar({handleTheme, theme}) {
       </div>
       
       <div className={style.menuButton} >
-         < Button text={(theme)?<ion-icon name="sunny-outline"></ion-icon>:<ion-icon name="moon"></ion-icon> } onclick={handleTheme}/>
-        <Link to="/crear-actividad">< Button text={<span><ion-icon name="add-sharp"></ion-icon>Actividad</span>} /></Link>
-        <Link to="/">< Button text={<span><ion-icon name="log-out-outline"></ion-icon> Salir</span>} /></Link>
+         < Button text={(theme)?'☀️':'🌙'} onclick={handleTheme}/>
+         <Link to="/crear-actividad">< Button text={ (theme)?  <span><img src={plusW} /> Crear Actividad</span>: <span><img src={plusB}/> Crear Actividad</span>} /></Link>
+        <Link to="/">< Button text={(theme)? <span><img src={logoutaW}/>Salir</span> :<span><img src={logoutB}/>Salir</span>} /></Link>
+
+        
       </div>
     </header>)
 }

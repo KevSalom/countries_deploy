@@ -106,7 +106,7 @@ export default function ActivityBar({
 
       <div className={style.search}>
         <label htmlFor="search">
-          <ion-icon name="search"></ion-icon>
+        <span>🔍︎</span>
           <input
             type="text"
             id="search"
@@ -124,11 +124,11 @@ export default function ActivityBar({
       <div className={style.itemSort}>
         <Button text={"⌚ Duración"} onclick={() => handleSort("duration")} />
         <Button
-          text={<ion-icon name="arrow-up-outline"></ion-icon>}
+          text={<span>↑</span>}
           onclick={() => handleSort("duration", true)}
         />
         <Button
-          text={<ion-icon name="arrow-down-outline"></ion-icon>}
+          text={<span>↓</span>}
           onclick={() => handleSort("duration", false)}
         />
       </div>
@@ -136,11 +136,11 @@ export default function ActivityBar({
       <div className={style.itemSort}>
         <Button text={"⚡ Dificultad"} onclick={() => handleSort("difficulty")} />
         <Button
-          text={<ion-icon name="arrow-up-outline"></ion-icon>}
+          text={<span>↑</span>}
           onclick={() => handleSort("difficulty", true)}
         />
         <Button
-          text={<ion-icon name="arrow-down-outline"></ion-icon>}
+          text={<span>↓</span>}
           onclick={() => handleSort("difficulty", false)}
         />
       </div>
@@ -148,11 +148,11 @@ export default function ActivityBar({
       <div className={style.itemSort}>
         <Button text={'A - Z'} onclick={() => handleSort("name", true)} />
         <Button
-          text={<ion-icon name="arrow-up-outline"></ion-icon>}
+          text={<span>↑</span>}
           onclick={() => handleSort("name", true)}
         />
         <Button
-          text={<ion-icon name="arrow-down-outline"></ion-icon>}
+          text={<span>↓</span>}
           onclick={() => handleSort("name", false)}
         />
       </div>

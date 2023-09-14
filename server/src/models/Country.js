@@ -24,19 +24,11 @@ module.exports = (sequelize) => {
     },
     area: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      get() {
-       const rawValue = this.getDataValue('area');
-       return `${rawValue.toLocaleString('de-DE')} Km2`;
-     }
+      allowNull: false
     },
     population:{
       type: DataTypes.INTEGER,
       allowNull: false,
-       get() {
-        const rawValue = this.getDataValue('population');
-        return `${rawValue.toLocaleString('de-DE')}`;
-      }
     },
     languages: {
       type: DataTypes.ARRAY(DataTypes.STRING)

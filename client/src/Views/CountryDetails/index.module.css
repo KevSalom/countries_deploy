@@ -37,3 +37,11 @@
     margin: 50px 0;
 
 }
+
+h1 span{
+    position: relative;
+    color: rgb(255, 255, 255);
+    font-size: 3rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 1px rgb(179, 179, 179);
+}

@@ -16,8 +16,9 @@ const Modal = ({ modalOpen, onClose, title, content, type, options, handleOption
 
   return (
     <div className={modalClassName}>
+      
       <form className={modalContentClassName}>
-        <div className={styles.image} > { (type === 'success')? <ion-icon name="checkmark-outline"></ion-icon> : (type === 'error') ? <ion-icon name="close-outline"></ion-icon> : <ion-icon name="alert-outline"></ion-icon> } </div>
+        <div className={styles.image} > { (type === 'success')? '✔' : (type === 'error') ? 'X' : '!' } </div>
 
         <span className={styles.title} >{title}</span>
 

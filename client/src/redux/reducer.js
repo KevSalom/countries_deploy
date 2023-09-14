@@ -1,9 +1,12 @@
-import {GETCOUNTRIES, GETACTIVITIES, UPDCURRENTCOUNTRIES, UPDCURRENTACTIVITIES, FILTERCOUNTRY, DELETEACTIVITY, COUNTRYBYACTIVITY} from './action'
+import {GETCOUNTRIES, GETACTIVITIES, UPDCURRENTCOUNTRIES, UPDCURRENTACTIVITIES, FILTERCOUNTRY, DELETEACTIVITY, COUNTRYBYACTIVITY, SORTCOUNTRYBYACTIVITIES, FILTERCONTINENANDACTIVITY, FILTERSETUP} from './action'
+
 const initialState = {
     allCountries: [],
     currentCountries: [],
     allActivities: [],
-    currentActivities:[]
+    currentActivities:[],
+    currentFiltersSetUp:{continentFilter: '', activityFilter:'', inputSearchBar:'', currentSort:''}
+   
   };
   
   export const countriesReducer = (state = initialState, action) => {
@@ -11,7 +14,7 @@ const initialState = {
         case GETCOUNTRIES :
          return { ...state,
             allCountries: action.payload,
-            currentCountries: action.payload
+            // currentCountries: action.payload
          };
          case GETACTIVITIES :
          return { ...state,
@@ -36,10 +39,10 @@ const initialState = {
                 c.continent === action.payload
             )
             return { ...state,
-                allCountries: [...state.allCountries],
             currentCountries: countriesFiltred
             };
-            case DELETEACTIVITY : 
+
+        case DELETEACTIVITY : 
             const activitiesFiltred = state.allActivities.filter((a)=>
                 a.id !== action.payload
             )
@@ -47,13 +50,48 @@ const initialState = {
                 allActivities: activitiesFiltred,
                 currentActivities: activitiesFiltred
             };
-            case COUNTRYBYACTIVITY : 
+
+         case COUNTRYBYACTIVITY : 
             const countries = state.allCountries.filter((c) => 
                c.Activities.some((activity) => activity.name === action.payload)
             )
             return { ...state,
                currentCountries: countries
             };
+
+         case SORTCOUNTRYBYACTIVITIES : 
+
+         const {order, sort} = action.payload;
+         let countriesSorted = [];
+
+         if(order === 'name'){
+            countriesSorted = state.currentCountries.sort((a,b) => 
+            sort ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)) 
+
+         } else {
+            countriesSorted = state.currentCountries.sort((a,b) => sort ?  a[order]- b[order] :  b[order] - a[order])
+         }
+            return { ...state,
+             currentCountries:   countriesSorted
+            };
+
+      case FILTERCONTINENANDACTIVITY : 
+
+           const {activity, continent} = action.payload;
+
+           const countriesWithBothFilters = state.allCountries.filter((c)=>
+           c.Activities.some((a) => a.name === activity) && c.continent === continent
+           )
+            return { ...state,
+               currentCountries: countriesWithBothFilters
+            };
+
+     case FILTERSETUP : 
+
+            return { ...state,
+               currentFiltersSetUp: action.payload
+            };
+
          default:
             return {...state}
      }

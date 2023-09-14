@@ -16,6 +16,15 @@ left: -55px;
       transform: translateY(-50%);
 }
 
+.numberPagination p{
+  position: absolute;
+  bottom: 0;
+  left: 47.7%;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 1.2rem;
+} 
+
 .containerButton {
     position: relative;
     height: 100%;
@@ -25,7 +34,7 @@ left: -55px;
 
 .button {
   border: 2px solid var(--text-color);
-  background-color: var(--background-color-cards);
+  background-color: var(--background-color-white);
   border-radius: 16px;
   height: 100%;
   width: 100%;
@@ -39,6 +48,9 @@ left: -55px;
   left: -4px;
   top: -4px;
   cursor: pointer;
+  font-size: 40px;
+  color: var(--text-color);
+  padding-bottom:5px ;
 }
 
 button:disabled {
@@ -49,11 +61,6 @@ button:disabled {
 
 button:disabled .backButton {
     display: none;
-}
-
-.button ion-icon {
-  font-size: 40px;
-  color: var(--text-color);
 }
 
 .button:hover {

@@ -27,7 +27,7 @@ export default function CountryDetail() {
           backgroundImage: `url(${countryData ? countryData.flag : undefined})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          filter: "blur(2px) brightness(0.25)",
+          filter: "blur(2px) brightness(0.4)",
           width: "102%",
           height: "115%",
           backgroundPosition: "center",
@@ -37,7 +37,7 @@ export default function CountryDetail() {
         }}
       >
       </div>
-      <div><h1 className={style.name}>{countryData && countryData.name}</h1>
+      <div><h1 className={style.name}>{countryData && countryData.name}<span>({countryData && countryData.id})</span></h1>
       <h2 className={style.capital}>{countryData && countryData.capital && countryData.capital[0]}</h2>
       </div>
       

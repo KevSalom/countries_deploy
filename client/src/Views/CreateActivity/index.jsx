@@ -1,7 +1,7 @@
 import ActivityForm from '../../Components/ActivityForm'
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getCountries } from "../../redux/action";
+import { useSelector, useDispatch} from 'react-redux'
+import { getCountries, getActivities  } from "../../redux/action";
 import Modal from "../../Components/Modal"
 import Loader from "../../Components/Loader"
 import axios from 'axios'
@@ -10,8 +10,6 @@ import style from './index.module.css'
 
 export default function CreateActivity() {
 
-const [message, setMessage] = useState('')
-const [error, setError] = useState('')
 const countriesFromRedux = useSelector(state => state.allCountries);
 const dispatch = useDispatch()
 
@@ -49,11 +47,14 @@ const URL = "/countries";
       const response = await axios.post(URL, data);
       
       if(response.status === 201){
+        await dispatch(getActivities()); //Actualizar el estado de actividades con la nueva información
+        await dispatch(getCountries()) ;//Actualizar el estado de paises con la nueva información
         setIsLoading(false)
         setModalOpen(true)
         setModalType('success')
         setModalTitle('EXCELENTE')
         setModaMessage('¡Actividad Creada con éxito!')
+        
         return true
       } 
       
@@ -94,8 +95,7 @@ const URL = "/countries";
     <div>
     {(inLoanding) ? <Loader/> : undefined}
     <Modal    modalOpen={modalOpen} onClose={handleCloseModal} title={modalTitle} type={modalType}   content={modalMessage} />
-    {message && <p>{message}</p>}
-    {countriesFromRedux.length > 0 ? <ActivityForm handleSubmit={handleSubmit} errorMessage={setError} setMessage={setMessage}  error={error} /> : undefined}
+    {countriesFromRedux.length > 0 ? <ActivityForm handleSubmit={handleSubmit}/> : undefined}
     </div>
     </div>
   )

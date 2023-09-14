@@ -27,6 +27,13 @@ padding: 8px;
   
 }
 
+button:disabled {
+  color: rgb(94, 94, 94);
+  background-color: var(--gray);
+  left: 0px;
+  top: 0px;
+}
+
 .button span {
   display: flex;
   align-items: center;
