@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom'
 import InfoCountry from "../../Components/InfoCountry";
 import style from "./index.module.css";
 
 export default function CountryDetail() {
   const { id } = useParams();
   const [countryData, serCountryData] = useState();
-  const [message, setMessage] = useState(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const URL = `/countries/${id}`;
@@ -16,7 +17,12 @@ export default function CountryDetail() {
       .then(({ data }) => {
         serCountryData(data);
       })
-      .catch(({ response }) => setMessage(response.data.error));
+      .catch(({ response }) => {
+
+        if(response.status === 400) {
+            navigate('/Error404', { replace: true });
+        }
+      });
   }, []);
 
   return (

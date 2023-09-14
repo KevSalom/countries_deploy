@@ -7,6 +7,7 @@ import CreateActivity from './Views/CreateActivity'
 import CountryDetail from './Views/CountryDetails'
 import NavBar from './Components/NavBar'
 import Footer from './Components/Footer'
+import Error404 from './Components/Error 404'
 import './App.css'
 import axios from 'axios'
 axios.defaults.baseURL = 'https://countriesdeploy-production.up.railway.app/'
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/actividades" element={<Activities/>}/>
         <Route path="/crear-actividad" element={<CreateActivity/>}/>
         <Route path="/paises/:id" element={<CountryDetail/>}/>
+        <Route path="*" element={<Error404/>}/>
       </Routes>
       </main>
       {(location.pathname !== "/") ? <Footer theme={theme} />: null}

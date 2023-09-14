@@ -13,9 +13,7 @@
     grid-template-columns: repeat(5, 1fr);
     width: 85%;
     gap:30px;
-    padding-bottom: 5px;
     position: relative;
-
 }
 
 .paginationContainer{
