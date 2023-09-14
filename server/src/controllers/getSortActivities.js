@@ -35,8 +35,6 @@ module.exports = async (req, res) => {
       order: [[type, sort]],
     });
 
-    console.log(activitiesSorted)
-
     res.status(200).json(activitiesSorted);
   } catch (error) {
     return res.status(500).json({ error: error.message });

@@ -5,7 +5,6 @@ const {Sequelize} = require('sequelize')
 module.exports = async (req, res) => {
 
     try {
-        console.log(req.query)
         const { type, sort, continent} = req.query; 
         const validTypes = ['population', 'area', 'totalActivities', 'name']
         const validContinent = ['Africa', 'Europe', 'Oceania', 'Asia', 'South America', 'North America', 'Antarctica'];
@@ -23,7 +22,6 @@ module.exports = async (req, res) => {
             }
         }
         
-        console.log(whereCondition)
         const countriesSorted = await Country.findAll({
         attributes: [
                 'id',
