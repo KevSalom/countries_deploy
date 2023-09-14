@@ -10,6 +10,7 @@
   position: relative;
   color: #1b1d21;
 overflow: hidden;
+width: 380px;
 }
 
 .cardHeader {
@@ -104,12 +105,14 @@ display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0;
-  height: 46px;
+  height: 51px;
 }
 
 .acitivityCountries {
+  min-height: 25px;
   display: flex;
   gap: 3px;
+  flex-wrap: wrap;
 }
 
 .activityInfo{
